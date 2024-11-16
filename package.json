@@ -1,0 +1,27 @@
+{
+  "name": "md2slide_gpt",
+  "version": "1.0.0",
+  "description": "Markdown to slide with GPT-3",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@marp-team/marp-core": "^4.0.0",
+    "autoprefixer": "^10.4.20",
+    "monaco-editor": "^0.52.0",
+    "postcss": "^8.4.49",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1"
+  }
+}
