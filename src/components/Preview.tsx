@@ -3,15 +3,14 @@ import { Marp } from '@marp-team/marp-core';
 
 type PreviewProps = {
   markdown: string;
-  template: string;
 };
 
-const Preview: React.FC<PreviewProps> = ({ markdown, template }) => {
+const Preview: React.FC<PreviewProps> = ({ markdown }) => {
   // Marpit インスタンスの作成
   const marp = new Marp({ html: true });
 
   // Markdown を HTML に変換
-  const { html, css } = marp.render(`---\ntheme: ${template}\n---\n${markdown}`);
+  const { html, css } = marp.render(markdown);
 
   // カスタムスタイルを追加
   const customStyles = `

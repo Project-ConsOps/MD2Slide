@@ -4,30 +4,33 @@ import Preview from './components/Preview';
 import TemplateSelector from './components/TemplateSelector';
 import ExportButton from './components/ExportButton';
 
-
 const App = () => {
   const [markdown, setMarkdown] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState('default');
+
+  const handleTemplateInsert = (templatePath: string) => {
+    const newSlide = `\n![bg](./${templatePath})\n\n---\n`;
+    setMarkdown((prev) => prev + newSlide);
+    };
+  
 
   return (
     <div className="flex flex-col h-screen">
       {/* テンプレートセレクタ */}
       <div className="flex-shrink-0 bg-gray-100">
-        <TemplateSelector onSelect={setSelectedTemplate} />
+        <TemplateSelector onTemplateClick={handleTemplateInsert} />
       </div>
 
       {/* エクスポートボタン */}
-      <ExportButton markdown={markdown} template={selectedTemplate} />
+      <ExportButton markdown={markdown} />
 
-      {/* エディタとプレビューのセクション */}
-      <div className="flex flex-grow h-hull">
-        {/* エディタ部分 */}
-        <div className="w-1/2 border-r overflow-y-auto h-hull">
-          <Editor value={markdown} onChange={setMarkdown} />
+      {/* エディタとプレビュー */}
+      <div className="flex flex-grow h-full">
+        <div className="w-1/2 border-r overflow-y-auto">
+            <Editor value={markdown} onChange={setMarkdown} />
         </div>
-        {/* プレビュー部分 */}
-        <div className="w-1/2 overflow-y-auto h-hull">
-          <Preview markdown={markdown} template={selectedTemplate} />
+        <div className="w-1/2 overflow-y-auto">
+        <Preview markdown={markdown} />
         </div>
       </div>
     </div>
