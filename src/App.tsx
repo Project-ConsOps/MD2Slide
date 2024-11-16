@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 import TemplateSelector from './components/TemplateSelector';
+import ExportButton from './components/ExportButton';
+
 
 const App = () => {
   const [markdown, setMarkdown] = useState('');
@@ -13,6 +15,10 @@ const App = () => {
       <div className="flex-shrink-0 bg-gray-100">
         <TemplateSelector onSelect={setSelectedTemplate} />
       </div>
+
+      {/* エクスポートボタン */}
+      <ExportButton markdown={markdown} template={selectedTemplate} />
+
       {/* エディタとプレビューのセクション */}
       <div className="flex flex-grow h-hull">
         {/* エディタ部分 */}

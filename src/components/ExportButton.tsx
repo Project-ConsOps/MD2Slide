@@ -1,6 +1,6 @@
 import React from 'react';
+import { Marp } from '@marp-team/marp-core';
 import { saveAs } from 'file-saver';
-import Marpit from '@marp-team/marpit';
 
 type ExportButtonProps = {
   markdown: string;
@@ -8,28 +8,24 @@ type ExportButtonProps = {
 };
 
 const ExportButton: React.FC<ExportButtonProps> = ({ markdown, template }) => {
-  const handleExportHTML = () => {
-    // Marpit インスタンスを作成
-    const marpit = new Marpit({
-      html: true,
-      container: template || 'div',
-    });
+  const handleExportHTML = async () => {
+    // Marp インスタンスを作成
+    const marp = new Marp({ html: true });
+    const { html, css } = marp.render(`---\ntheme: ${template}\n---\n${markdown}`);
 
-    // Markdown を HTML に変換
-    const { html, css } = marpit.render(markdown);
-
-    // 完全な HTML ドキュメントとして構築
+    // HTML ドキュメントを構築
     const fullHtml = `
       <html>
-      <head>
-        <style>${css}</style>
-      </head>
-      <body>${html}</body>
+        <head>
+          <meta charset="UTF-8">
+          <style>${css}</style>
+        </head>
+        <body>${html}</body>
       </html>
     `;
 
-    // Blob を作成し、ダウンロード
-    const blob = new Blob([fullHtml], { type: 'text/html' });
+    // Blob を作成し、ファイルとして保存
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
     saveAs(blob, 'presentation.html');
   };
 
