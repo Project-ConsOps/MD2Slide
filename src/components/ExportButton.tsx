@@ -1,4 +1,5 @@
 import React from 'react';
+import { Marp } from '@marp-team/marp-core';
 import { saveAs } from 'file-saver';
 
 type ExportButtonProps = {
@@ -6,7 +7,11 @@ type ExportButtonProps = {
 };
 
 const ExportButton: React.FC<ExportButtonProps> = ({ markdown }) => {
-  const handleExportHTML = () => {
+  const handleExportHTML = async () => {
+
+    const marp = new Marp({ html: true });
+    const { html } = marp.render(markdown);
+    
     const fullHtml = `
       <html>
         <head>
