@@ -1,5 +1,7 @@
 import React from 'react';
 import { Marp } from '@marp-team/marp-core';
+import fs from 'fs';
+import path from 'path';
 
 type PreviewProps = {
   markdown: string;
@@ -7,7 +9,9 @@ type PreviewProps = {
 
 const Preview: React.FC<PreviewProps> = ({ markdown }) => {
   // Marpit インスタンスの作成
-  const marp = new Marp({ html: true });
+  const marp = new Marp({ 
+    html: true,
+    });
 
   // Markdown を HTML に変換
   const { html, css } = marp.render(markdown);
